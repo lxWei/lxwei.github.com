@@ -1,11 +1,16 @@
 ---
 layout: post
 category:  first blog
-title: my first blog with jekyll
+title: My first blog with jekyll
 ---
 
+# 博客由来
+年中在[homezz](http://www.homezz.com/)购买了vps，在耐思尼克(http://www.iisp.com/)购买域名，搭建了Wordpress博客，日常管理博客需要花费很多精力，而且，一直想尝试用git+github+markdown+jekyll的方式来写作，故搭建此博客。
 
-原文：
+# 参考资料
+* [写作环境搭建(git+github+markdown+jekyll)](http://ellochen.github.io/2013/03/%E5%86%99%E4%BD%9C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA(git+github+markdown+jekyll)/)
+* [Git与Github入门资料](http://www.yangzhiping.com/tech/git.html)
+* [Markdown: Basics （快速入门)](http://wowubuntu.com/markdown/basic.html)
+* [Hawstein的blog](https://github.com/Hawstein/hawstein.github.com)
 
-test
 
