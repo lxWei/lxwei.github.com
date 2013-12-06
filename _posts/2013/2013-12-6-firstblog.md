@@ -1,6 +1,6 @@
 ---
 layout: post
-category:  first blog
+category:  Life
 title: My first blog with jekyll
 ---
 
@@ -13,6 +13,6 @@ title: My first blog with jekyll
 * [Markdown: Basics （快速入门)](http://wowubuntu.com/markdown/basic.html)
 * [Hawstein的blog](https://github.com/Hawstein/hawstein.github.com)
 
-[1]: "http://ellochen.github.io/2013/03/写作环境搭建(git+github+markdown+jekyll)/"
+[1]: http://ellochen.github.io/2013/03/写作环境搭建(git+github+markdown+jekyll)/
 
 
