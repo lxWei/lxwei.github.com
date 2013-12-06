@@ -1,0 +1,247 @@
+---
+author: wlxwolves
+comments: true
+date: 2013-12-06 07:52:39+00:00
+layout: post
+slug: '262'
+title: 从源代码到可执行文件——编译全过程解析
+wordpress_id: 262
+categories:
+- 程序设计
+---
+
+程序的生命周期从一个高级C语言程序开始，这种形式能够被人读懂，却不能被机器读懂，为了在系统上运行这个程序，该源程序需要被其他程序转化为一系列低级机器语言指令，然后将这些指令按照可执行目标程序的格式打包并以二进制磁盘文件形式存储起来。
+
+在Linux系统下，可用以下指令完成源程序到目标程序的转化：
+
+    
+    gcc -o hello hello.c main.c
+
+
+gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编译、汇编、链接（分别使用预处理器、编译器、汇编器、链接器，这四个程序构成了编译系统）四个步骤，将其翻译成可执行目标程序hello。如下图所示：
+
+[![图表1](http://blog.loongxing.net/wp-content/uploads/2013/12/图表11.jpeg)](http://blog.loongxing.net/wp-content/uploads/2013/12/图表11.jpeg)
+
+运行以下命令：
+
+    
+    gcc –help
+
+
+如下图所示，分别对应上图四个阶段：
+
+[![gcc选项](http://blog.loongxing.net/wp-content/uploads/2013/12/gcc选项1.png)](http://blog.loongxing.net/wp-content/uploads/2013/12/gcc选项1.png)
+
+
+# 1.示例程序
+
+
+
+    
+    //main.c
+    
+    #include<stdio.h>
+    
+    void hello();
+    
+    int main()
+    
+    {
+    
+    hello();
+    
+    return 0;
+    
+    }
+    
+    //hello.c
+    
+    #include<stdio.h>
+    
+    void hello()
+    
+    {
+    
+    printf("Hello world\n");
+    
+    }
+
+
+
+
+
+# 2.预处理
+
+
+预处理器(CPP)根据源程序中以字符”#”开头的命令，修改源程序，得到另一个源程序，常以.i作为文件扩展名。修改主要包括#include、#define和条件编译三个方面。
+
+可执行以下命令查看程序变化：
+
+    
+    gcc -o main.i -E main.c
+    
+    gcc -o hello.i -E hello.c
+
+
+查看hello.i,如下图所示(main.i类似)：
+
+[![hello.i](http://blog.loongxing.net/wp-content/uploads/2013/12/hello.i1.png)](http://blog.loongxing.net/wp-content/uploads/2013/12/hello.i1.png)
+
+从上图可以看出，预处理只是对源文件进行了扩展，得到的仍然是C语言源程序。
+
+
+# 3. 编译
+
+
+编译器(CCL)将经过预处理器处理得到的文本文件hello.i和main.i翻译成hello.s与main.s，其中包含了汇编语言程序，汇编语言程序以一种标准的文本格式确切描述一条低级机器语言指令。
+
+运行以下命令进行编译：
+
+    
+    gcc -S main.i hello.i
+
+
+查看main.s和hello.s：
+
+    
+    //main.s
+    
+    .file "main.c"
+    
+    .text
+    
+    .globl main
+    
+    .type main, @function
+    
+    main:
+    
+    .LFB0:
+    
+    .cfi_startproc
+    
+    pushl %ebp
+    
+    .cfi_def_cfa_offset 8
+    
+    .cfi_offset 5, -8
+    
+    movl %esp, %ebp
+    
+    .cfi_def_cfa_register 5
+    
+    andl $-16, %esp
+    
+    call hello
+    
+    movl $0, %eax
+    
+    leave
+    
+    .cfi_restore 5
+    
+    .cfi_def_cfa 4, 4
+    
+    ret
+    
+    .cfi_endproc
+    
+    .LFE0:
+    
+    .size main, .-main
+    
+    .ident "GCC: (Ubuntu/Linaro 4.8.1-10ubuntu8) 4.8.1"
+    
+    .section .note.GNU-stack,"",@progbits
+
+
+
+
+    
+    //hello.s
+    
+    .file "hello.c"
+    
+    .section .rodata
+    
+    .LC0:
+    
+    .string "Hello world"
+    
+    .text
+    
+    .globl hello
+    
+    .type hello, @function
+    
+    hello:
+    
+    .LFB0:
+    
+    .cfi_startproc
+    
+    pushl %ebp
+    
+    .cfi_def_cfa_offset 8
+    
+    .cfi_offset 5, -8
+    
+    movl %esp, %ebp
+    
+    .cfi_def_cfa_register 5
+    
+    subl $24, %esp
+    
+    movl $.LC0, (%esp)
+    
+    call puts
+    
+    leave
+    
+    .cfi_restore 5
+    
+    .cfi_def_cfa 4, 4
+    
+    ret
+    
+    .cfi_endproc
+    
+    .LFE0:
+    
+    .size hello, .-hello
+    
+    .ident "GCC: (Ubuntu/Linaro 4.8.1-10ubuntu8) 4.8.1"
+    
+    .section .note.GNU-stack,"",@progbits
+
+
+
+
+# 4.汇编
+
+
+汇编器(AS)将hello.s和main.s翻译成机器语言指令，并打包成可重定位目标程序，一般以.o为文件扩展名。可重定位目标程序是二进制文件，它的字节编码是机器语言指令而不是字符。
+
+运行以下指令可得到重定位目标程序main.o和hello.o：
+
+    
+    gcc -c main.s hello.s
+
+
+用文本编辑器打开main.o和hello.o发现文件是乱码，因为此时已经是二进制文件。
+
+
+# 5.链接
+
+
+链接程序(LD）将main.o和hello.o以及一些其他必要的目标文件组合起来，创建可执行目标文件。
+
+    
+    gcc -o hello main.o hello.o
+
+
+得到可执行程序hello.
+
+在终端运行./hello，程序加载并运行，
+
+
