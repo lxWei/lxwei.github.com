@@ -17,7 +17,6 @@ title: My first blog with jekyll
 8. Congratulations!
 
 # 迁移wordpress的blog
-参考[exitwp](http://yishanhe.net/exitwp-convert-wordpress--markdown/)。
 * sudo apt-get install python-yaml python-beautifulsoup python-html2text。
 * git clone git://github.com/thomasf/exitwp.git。
 * 将wordpress导出的xml文件放到exitwp下的wordpress-xml文件夹下。
@@ -30,6 +29,7 @@ title: My first blog with jekyll
 * [Git与Github入门资料](http://www.yangzhiping.com/tech/git.html)
 * [Markdown: Basics （快速入门)](http://wowubuntu.com/markdown/basic.html)
 * [Hawstein的blog](https://github.com/Hawstein/hawstein.github.com)
+* [exitwp](http://yishanhe.net/exitwp-convert-wordpress--markdown/)。
 
 [1]: http://ellochen.github.io/2013/03/写作环境搭建(git+github+markdown+jekyll)/
 
