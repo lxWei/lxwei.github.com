@@ -16,6 +16,14 @@ title: My first blog with jekyll
 7. 在_post文件夹下添加yy-mm--dd-title.md格式命名的文件。写完之后push到github上即可。
 8. Congratulations!
 
+# 迁移wordpress的blog
+参考[exitwp](http://yishanhe.net/exitwp-convert-wordpress--markdown/)。
+1. sudo apt-get install python-yaml python-beautifulsoup python-html2text。
+2. git clone git://github.com/thomasf/exitwp.git。
+3. 将wordpress导出的xml文件放到exitwp下的wordpress-xml文件夹下。
+4. python exitwp。此时，可能报错，需要安装BeautifulSoup。
+5. 生成的markdown文件在build文件夹下，拷贝到博客的_post文件夹下，提交即可。
+
 
 # 参考资料
 * [写作环境搭建(git+github+markdown+jekyll)][1]
