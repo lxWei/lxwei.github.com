@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /assets
+Allow: /posts
+Sitemap: http://lxWei.github.com/sitemap.txt
+Sitemap: http://lxWei.github.com/atom.xml

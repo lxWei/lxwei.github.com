@@ -1,0 +1,16 @@
+markdown: rdiscount
+pygments: true
+permalink: /posts/:title.html
+auto: true
+rdiscount:
+  extensions: [smart]
+
+title: lxWei's Blog
+author:
+  name: lxWei
+  email: longxingwei@gmail.com
+  github: lxWei 
+
+production_url: http://lxWei.com
+
+baseurl: /
