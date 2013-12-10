@@ -1,5 +1,5 @@
 ---
-author: wlxwolves
+author: lxWei
 comments: true
 date: 2013-07-25 14:43:24+00:00
 layout: post
@@ -7,23 +7,16 @@ slug: '%e5%b8%b8%e7%94%a8%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95%e6%80%bb%e7%bb%93'
 title: 常用排序算法总结
 wordpress_id: 185
 categories:
-- 技术博客
-- 数据结构与算法
+- Programming
 ---
 
 # 选择排序
 
-
-
-
-
 * * *
-
-
 
 原理比较简单，每次循环选择最小的未排序元素将其放到未排序的最前或每次循环选择最大的未排序元素将其放到未排序的最后，进行N次循环即可。代码如下：
 
-    
+```c++
     void selectionSort(item data[], int l, int r)
     {
     	int i = 0, j = 0;
@@ -37,6 +30,7 @@ categories:
     		exchange(&data[i],&data[min]);
     	}
     }
+```    
 
 
 
