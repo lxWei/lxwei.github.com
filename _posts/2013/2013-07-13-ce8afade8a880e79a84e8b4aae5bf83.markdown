@@ -7,7 +7,7 @@ slug: c%e8%af%ad%e8%a8%80%e7%9a%84%e8%b4%aa%e5%bf%83
 title: C语言的贪心
 wordpress_id: 180
 categories:
-- Programming
+- programming
 ---
 
 例：当C编译器读入一个‘/’，后面又跟着一个‘*’，这时候，编译器需要做出判断：

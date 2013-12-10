@@ -7,7 +7,7 @@ slug: '%e5%b8%b8%e7%94%a8%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95%e6%80%bb%e7%bb%93'
 title: 常用排序算法总结
 wordpress_id: 185
 categories:
-    - programming
+- programming
 ---
 
 # 1. 选择排序
@@ -168,7 +168,7 @@ void selectionSort(item data[], int l, int r)
 
 看代码：
 
-   ```c++
+{% highlight cpp %} 
    void shellSort(item data[], int l, int r)
    {
        int i = 0, j = 0, h = 0;
@@ -191,7 +191,7 @@ void selectionSort(item data[], int l, int r)
            }
        }
    }
-   ``` 
+{% endhighlight %}
 
 
 步长序列能影响代码执行效率，本例采用Knuth在1969年提出的1、4、13、40……
@@ -212,6 +212,7 @@ void selectionSort(item data[], int l, int r)
 代码：
 
 
+{% highlight cpp %} 
     int partition(item *arr, int l, int r)
     {
         if(!arr || r < l) {
@@ -252,12 +253,13 @@ void selectionSort(item data[], int l, int r)
         quickSort(arr, l, i-1);
         quickSort(arr, i+1, r);
     }
+{% endhighlight %}
 
 
 这是最基本最简单的快排。
 
 
-## 效率
+## 5.1 效率
 
 
 最坏情况下大约使用N2/2次比较，这对于大文件是不可接受的。平均情况下2NlgN次比较。
@@ -265,18 +267,19 @@ void selectionSort(item data[], int l, int r)
 同时，基于递归的空间复杂度O(N)
 
 
-## 优化
+## 5.2 优化
 
 
 
 
-### 空间效率——非递归实现
+### 5.2.1 空间效率——非递归实现
 
 
 非递归实现减少了函数调用与返回，同时，能减少部分栈空间使用。
 
 
     //非递归程序，节省空间，不能改进时间开销
+{% highlight cpp %} 
     typedef struct node
     {
         int l;
@@ -322,11 +325,12 @@ void selectionSort(item data[], int l, int r)
             }
         }
     }
+{% endhighlight %}
 
 
 
 
-###  时间效率
+### 5.2.2 时间效率
 
 
 1、 划分元素的选择
@@ -336,14 +340,10 @@ void selectionSort(item data[], int l, int r)
 
 
     1. 原理：快排的基本实现选择data[r]作为划分元素，这种情况下，如果数组已经有序，那么，排序时间将达到N2，可针对此进行优化。
-
-
     2. 优化方式
 
 
       * 采用随即元素作为划分元素。
-
-
       * 从数组中取三个元素，如data[l]、data[(l+r)/2]、data[r]，取中间元素作为划分元素。这使得快排的最坏情况基本不可能出现。
 
 
@@ -358,8 +358,6 @@ void selectionSort(item data[], int l, int r)
 
 
     1. 原理：递归过程会产生很多小的数组，即r-l比较小，会占用大量空间和时间，可以针对此对其进行改进。
-
-
     2. 优化方案：
 
 
@@ -373,6 +371,7 @@ void selectionSort(item data[], int l, int r)
 
 
 
+{% highlight cpp %} 
 > 
 
 >     
@@ -381,7 +380,7 @@ void selectionSort(item data[], int l, int r)
     >     }
 > 
 > 
-
+{% endhighlight %}
 
 
 其中， M表示一个小正整数，如5-25。
@@ -398,6 +397,7 @@ void selectionSort(item data[], int l, int r)
 
 
 
+{% highlight cpp %} 
 > 
 
 >     
@@ -406,6 +406,7 @@ void selectionSort(item data[], int l, int r)
     >     }
 > 
 > 
+{% endhighlight %}
 
 
 
@@ -426,6 +427,7 @@ void selectionSort(item data[], int l, int r)
 
 
 
+{% highlight cpp %} 
     void quickSortRepeat(item arr[], int l, int r)
     {
         if(!arr || r <= l) {
@@ -479,11 +481,12 @@ void selectionSort(item data[], int l, int r)
         quickSortRepeat(arr,l,j);
         quickSortRepeat(arr,i,r);
     }
+{% endhighlight %}
 
 
 
 
-# 归并排序
+# 6. 归并排序
 
 
 
@@ -503,28 +506,29 @@ void selectionSort(item data[], int l, int r)
 归并排序正是基于这两点！
 
 
-## 效率
+## 6.1 效率
 
 
 归并排序的运行时间主要取决于输入关键字的个数，对关键字的顺序不太敏感(对比快排)，无论对什么输入，对N个元素的文件的排序所需时间与NlgN成正比，没有最坏情况。
 
 
-## 缺点
+## 6.2 缺点
 
 
 所需空间与N成正比。要克服这个缺点，会很复杂，而且开销较大，实际应用中并不处理。
 
 
-## 代码实现
+## 6.3 代码实现
 
 
 
 
-### 两路归并
+### 6.3.1 两路归并
 
 
 
 
+{% highlight cpp %} 
     /**
     * 合并两个有序数组，使结果仍然有序
     */
@@ -550,16 +554,18 @@ void selectionSort(item data[], int l, int r)
             }
         }
     }
+{% endhighlight %}
 
 
 这里，前两个循环先建立bitonic序列(关键字序列先递增、再递减或先递减、再递增的序列)，从而将最大元素作为观察哨，这样，就不用判断两个序列是否处理完，去除if判断，能有效提高merge效率。
 
 
-### 递归——自顶向下
+### 6.3.2 递归——自顶向下
 
 
 
 
+{% highlight cpp %} 
     /**
     * 采用递归，自顶向下归并排序
     */
@@ -573,15 +579,17 @@ void selectionSort(item data[], int l, int r)
         mergeSortRecursion(data, m+1, r);
         merge(data, l, m, r);
     }
+{% endhighlight %}
 
 
 
 
-### 非递归——自底向上
+### 6.3.3 非递归——自底向上
 
 
 
 
+{% highlight cpp %} 
     /**
     * 不用递归，自底向上进行归并排序
     */
@@ -594,6 +602,7 @@ void selectionSort(item data[], int l, int r)
             }
         }
     }
+{% endhighlight %}
 
 
 可以说，归并排序是最理想的直接排序方法
@@ -603,8 +612,6 @@ void selectionSort(item data[], int l, int r)
 
 
     1. 运行时间与NlgN成正比
-
-
     2. 如果归并算法稳定，那么，归并排序是稳定的(本文所用归并算法并不稳定)
 
 
@@ -612,7 +619,7 @@ void selectionSort(item data[], int l, int r)
 虽然说快排比归并排序要快一些，但是，快排是不稳定的。
 
 
-# 堆排序
+# 7. 堆排序
 
 
 
@@ -625,7 +632,7 @@ void selectionSort(item data[], int l, int r)
 最后，以大根堆为例，实现堆排序。
 
 
-## 基本概念
+## 7.1 基本概念
 
 
 如果一棵树的每个节点的关键字都大于或等于其所有子节点的关键字，就称树是堆有序的。
@@ -635,12 +642,13 @@ void selectionSort(item data[], int l, int r)
 规定，数组0的位置存放节点个数，数组1的位置开始存放堆中元素，所以，对于节点i，如果其左右孩子存在，则存在与2i和2i+1；如果其父节点存在，则存在与i/2。
 
 
-## 堆排序
+## 7.2 堆排序
 
 
 大根堆中，树根节点保存当前堆中的最大值，如果每次取出该值，与堆中最后一个节点交换，然后，堆进行调整。取出堆中全部元素后，即排序完成，代码如下：
 
 
+{% highlight cpp %} 
     /**
     * 如果节点的值小于其子节点，则向下调整
     */
@@ -659,7 +667,9 @@ void selectionSort(item data[], int l, int r)
             k = j;
         }
     }
+{% endhighlight %}
 
+{% highlight cpp %} 
     /**
     * 根节点保存当前堆中的最大值，每次取出根节点的值与最后一个节点交换，调整堆 
     */
@@ -677,17 +687,18 @@ void selectionSort(item data[], int l, int r)
             fixDown(p, 1, --count);
         }
     }
+{% endhighlight %}
 
 
 
 
-## 效率
+## 7.3 效率
 
 
 效率分两部分，构建堆和排序。如上程序所示，构建堆所需时间为线性时间；排序时间为NlgN。
 
 
-## 堆排序、快排、归并排序的选择
+## 7.4 堆排序、快排、归并排序的选择
 
 
 
@@ -696,8 +707,6 @@ void selectionSort(item data[], int l, int r)
 
 
     1. **堆排序与归并排序：排序的(不)稳定性和是否需要额外空间。**
-
-
     2. **堆排序与快速排序：平均情况和最坏情况的选择。**
 
 
