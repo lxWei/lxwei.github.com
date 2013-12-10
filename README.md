@@ -1,3 +1,3 @@
 # lxWei's HomePage.
 
-<http://lxWei.github.com/>
+<http://lxWei.github.io/>

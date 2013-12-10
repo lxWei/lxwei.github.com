@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /assets
 Allow: /posts
-Sitemap: http://lxWei.github.com/sitemap.txt
-Sitemap: http://lxWei.github.com/atom.xml
+Sitemap: http://lxWei.github.io/sitemap.txt
+Sitemap: http://lxWei.github.io/atom.xml
