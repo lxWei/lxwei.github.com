@@ -7,53 +7,50 @@ slug: '%e5%b8%b8%e7%94%a8%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95%e6%80%bb%e7%bb%93'
 title: 常用排序算法总结
 wordpress_id: 185
 categories:
-- Programming
----
+    - Programming
+    ---
 
-# 选择排序
+# 1. 选择排序
 
 * * *
 
 原理比较简单，每次循环选择最小的未排序元素将其放到未排序的最前或每次循环选择最大的未排序元素将其放到未排序的最后，进行N次循环即可。代码如下：
 
 ```c++
-    void selectionSort(item data[], int l, int r)
-    {
-    	int i = 0, j = 0;
-    	for(i = l; i < r; i ++) {
-    		int min = i;
-    		for(j = i + 1; j <= r; j ++) {
-    			if(data[j] < data[min]) {
-    				min = j;
-    			}
-    		}
-    		exchange(&data[i],&data[min]);
-    	}
+void selectionSort(item data[], int l, int r)
+{
+    int i = 0, j = 0;
+    for(i = l; i < r; i ++) {
+        int min = i;
+        for(j = i + 1; j <= r; j ++) {
+            if(data[j] < data[min]) {
+                min = j;
+            }
+        }
+        exchange(&data[i],&data[min]);
     }
+}
 ```    
 
-
-
-
-## 适用场景
+## 1.1 适用场景
 
 
 对于元素较大，关键字较小的文件，选择排序通常比其它算法移动数据较少，应该选择选择排序。
 
 
-## 效率
+## 1.2 效率
 
 
 比较次数：N2/2，交换次数：N。时间复杂度：O(n2)，空间复杂度：O(1)。
 
 
-## 缺点
+## 1.3 缺点
 
 
 运行时间对文件中已有序的部分依赖较少，对已排好序的文件或各元素都相同的文件排序所花时间与对随机排列的文件排序所花时间基本一样。
 
 
-# 插入排序
+# 2. 插入排序
 
 
 
@@ -65,32 +62,33 @@ categories:
 
 原理比较简单，代码如下：<!-- more -->
 
-    
-    void insertionSort(item data[], int l, int r)
-    {
-    	int i = 0;
-    
-    	//设置观察哨
-    	for (i = r; i > l; --i) {
-    		if(data[i] < data[i-1]) {
-    			exchange(&data[i], &data[i-1]);
-    		}
-    	}
-    
-    	for (i = l+2; i <= r; ++i) {
-    		int j = i;
-    		item v = data[i];
-    
-    		//后移
-    		while (v < data[j-1]) {
-    			data[j] = data[j-1];
-    			-- j;
-    		}
-    
-    		//插入
-    		data[j] = v;
-    	}
-    }
+   ```c++
+   void insertionSort(item data[], int l, int r)
+   {
+       int i = 0;
+
+       //设置观察哨
+       for (i = r; i > l; --i) {
+           if(data[i] < data[i-1]) {
+               exchange(&data[i], &data[i-1]);
+           }
+       }
+
+       for (i = l+2; i <= r; ++i) {
+           int j = i;
+           item v = data[i];
+
+           //后移
+           while (v < data[j-1]) {
+               data[j] = data[j-1];
+               -- j;
+           }
+
+           //插入
+           data[j] = v;
+       }
+   }
+   ``` 
 
 
 注意：
@@ -98,29 +96,27 @@ categories:
 
 
 
-	
-    1. 从后往前，减少比较次数，而且不用交换，直接用a[i-1]覆盖掉a[i]即可。
 
-	
+    1. 从后往前，减少比较次数，而且不用交换，直接用a[i-1]覆盖掉a[i]即可。
     2. 添加哨兵，数组a[0]位置存放最小值作为哨兵，这样可以不用if语句判断是否到达最前位置，能有效提高效率。
 
 
 
 
 
-## 特点
+## 2.1 特点
 
 
 **运行时间与输入文件数据的原始排列顺序密切相关**。关键字已经排好序或基本排好序，插入排序比选择要快。
 
 
-## 效率
+## 2.2 效率
 
 
 平均情况，比较次数是N2/4，交换次数为N2/4。最坏情况是平均情况的2倍
 
 
-# 冒泡排序
+# 3. 冒泡排序
 
 
 
@@ -132,39 +128,33 @@ categories:
 
 直接看代码：
 
-    
-    void bubbleSort(item data[], int l, int r)
-    {
-    	int i = 0, j = 0;
-    	for (i = l; i < r; ++ i) {
-    		for (j = r; j > i; -- j) {
-    			if(data[j] < data[j-1]) {
-    				exchange(&data[j], &data[j-1]);
-    			}
-    		}
-    	}
-    }
+   ```c++
+   void bubbleSort(item data[], int l, int r)
+   {
+       int i = 0, j = 0;
+       for (i = l; i < r; ++ i) {
+           for (j = r; j > i; -- j) {
+               if(data[j] < data[j-1]) {
+                   exchange(&data[j], &data[j-1]);
+               }
+           }
+       }
+   }
+   ``` 
 
 
-优化策略：
-
-
-
-
-	
-    1. 当其中一步已经没有进行任何交换操作，即文件已经排好序，可以提前终止程序，可以提高冒泡排序的运行效率，但仍比不上插入排序。
+## 3.1 优化策略：
+1. 当其中一步已经没有进行任何交换操作，即文件已经排好序，可以提前终止程序，可以提高冒泡排序的运行效率，但仍比不上插入排序。
 
 
 
-
-
-## 效率
+## 3.2 效率
 
 
 平均情况下比较次数：N2/2，交换次数：N2/2。最坏情况与平均情况一样。
 
 
-# 希尔排序
+# 4. 希尔排序
 
 
 
@@ -178,35 +168,36 @@ categories:
 
 看代码：
 
-    
-    void shellSort(item data[], int l, int r)
-    {
-    	int i = 0, j = 0, h = 0;
-    
-    	//设置步长序列
-    	//该步长序列由Knuth提出
-    	for (h = 1; h <= (r-l)/9; h= 3*h + 1) {
-    		;//空语句
-    	}
-    
-    	for ( ; h > 0; h /= 3) {
-    		for (i = l + h; i <= r; i ++) {
-    			int j = i;
-    			item v = data[i];
-    			while (j >= l+h && v < data[j-h]) {
-    				data[j] = data[j-h];
-    				j -= h;
-    			}
-    			data[j] = v;
-    		}
-    	}
-    }
+   ```c++
+   void shellSort(item data[], int l, int r)
+   {
+       int i = 0, j = 0, h = 0;
+
+       //设置步长序列
+       //该步长序列由Knuth提出
+       for (h = 1; h <= (r-l)/9; h= 3*h + 1) {
+           ;//空语句
+       }
+
+       for ( ; h > 0; h /= 3) {
+           for (i = l + h; i <= r; i ++) {
+               int j = i;
+               item v = data[i];
+               while (j >= l+h && v < data[j-h]) {
+                   data[j] = data[j-h];
+                   j -= h;
+               }
+               data[j] = v;
+           }
+       }
+   }
+   ``` 
 
 
 步长序列能影响代码执行效率，本例采用Knuth在1969年提出的1、4、13、40……
 
 
-# 快排
+# 5. 快排
 
 
 
@@ -220,46 +211,46 @@ categories:
 
 代码：
 
-    
+
     int partition(item *arr, int l, int r)
     {
-    	if(!arr || r < l) {
-    		printf("invalid input\n");
-    		return;
-    	}
-    
-    	//选择最后一个元素作为划分元素
-    	item tag = arr[r];
-    	int i = l-1;
-    	int j = r;
-    
-    	while(1) {
-    		while(arr[++i] < tag) {
-    			;
-    		}
-    		while(arr[--j] > tag) {
-    			if(j == l) {
-    				break;
-    			}			
-    		}
-    		if(i >= j) {
-    			break;
-    		}
-    		exchange(&arr[i],&arr[j]);
-    	}
-    
-    	exchange(&arr[i],&arr[r]);
-    	return i;
+        if(!arr || r < l) {
+            printf("invalid input\n");
+            return;
+        }
+
+        //选择最后一个元素作为划分元素
+        item tag = arr[r];
+        int i = l-1;
+        int j = r;
+
+        while(1) {
+            while(arr[++i] < tag) {
+                ;
+            }
+            while(arr[--j] > tag) {
+                if(j == l) {
+                    break;
+                }			
+            }
+            if(i >= j) {
+                break;
+            }
+            exchange(&arr[i],&arr[j]);
+        }
+
+        exchange(&arr[i],&arr[r]);
+        return i;
     }
-    
+
     void quickSort(item *arr, int l, int r) 
     {
-    	if(r <= l) {
-    		return;
-    	}
-    	int i = partition(arr, l, r);
-    	quickSort(arr, l, i-1);
-    	quickSort(arr, i+1, r);
+        if(r <= l) {
+            return;
+        }
+        int i = partition(arr, l, r);
+        quickSort(arr, l, i-1);
+        quickSort(arr, i+1, r);
     }
 
 
@@ -284,52 +275,52 @@ categories:
 
 非递归实现减少了函数调用与返回，同时，能减少部分栈空间使用。
 
-    
+
     //非递归程序，节省空间，不能改进时间开销
     typedef struct node
     {
-    	int l;
-    	int r;
+        int l;
+        int r;
     }NODE;
     NODE stack[STACKSIZE];
     void quickSortNoRecursion(item *data, int l, int r)
     {
-    	if(!data || r < l) {
-    		return;
-    	}
-    	int i = 0;
-    	int pointer = 0;
-    	stack[pointer].l = l;
-    	stack[pointer].r = r;
-    	++ pointer;
-    	while(pointer) {
-    		l = stack[pointer-1].l;
-    		r = stack[pointer-1].r;
-    		-- pointer;
-    
-    		if(r <= l) continue;
-    
-    		i = partition(data, l, r);
-    
-    		//先让元素多的子数组进栈，先解决栈小的，有利于节省空间
-    		if( (i-l) > (r-i) ) {
-    			stack[pointer].l = l;
-    			stack[pointer].r = i-1;
-    			++ pointer;
-    
-    			stack[pointer].l = i+1;
-    			stack[pointer].r = r;
-    			++ pointer;
-    		} else {
-    			stack[pointer].l = i+1;
-    			stack[pointer].r = r;
-    			++ pointer;
-    
-    			stack[pointer].l = l;
-    			stack[pointer].r = i-1;
-    			++ pointer;
-    		}
-    	}
+        if(!data || r < l) {
+            return;
+        }
+        int i = 0;
+        int pointer = 0;
+        stack[pointer].l = l;
+        stack[pointer].r = r;
+        ++ pointer;
+        while(pointer) {
+            l = stack[pointer-1].l;
+            r = stack[pointer-1].r;
+            -- pointer;
+
+            if(r <= l) continue;
+
+            i = partition(data, l, r);
+
+            //先让元素多的子数组进栈，先解决栈小的，有利于节省空间
+            if( (i-l) > (r-i) ) {
+                stack[pointer].l = l;
+                stack[pointer].r = i-1;
+                ++ pointer;
+
+                stack[pointer].l = i+1;
+                stack[pointer].r = r;
+                ++ pointer;
+            } else {
+                stack[pointer].l = i+1;
+                stack[pointer].r = r;
+                ++ pointer;
+
+                stack[pointer].l = l;
+                stack[pointer].r = i-1;
+                ++ pointer;
+            }
+        }
     }
 
 
@@ -343,16 +334,16 @@ categories:
 
 
 
-	
+
     1. 原理：快排的基本实现选择data[r]作为划分元素，这种情况下，如果数组已经有序，那么，排序时间将达到N2，可针对此进行优化。
 
-	
+
     2. 优化方式
 
-	
+
       * 采用随即元素作为划分元素。
 
-	
+
       * 从数组中取三个元素，如data[l]、data[(l+r)/2]、data[r]，取中间元素作为划分元素。这使得快排的最坏情况基本不可能出现。
 
 
@@ -365,16 +356,16 @@ categories:
 
 
 
-	
+
     1. 原理：递归过程会产生很多小的数组，即r-l比较小，会占用大量空间和时间，可以针对此对其进行改进。
 
-	
+
     2. 优化方案：
 
 
 
 
-	
+
       * quicksort函数的if(r<=l)改为
 
 
@@ -386,8 +377,8 @@ categories:
 
 >     
 >     if(r - l <= M) {
->         insertionSort(data,l,r);
->     }
+    >         insertionSort(data,l,r);
+    >     }
 > 
 > 
 
@@ -399,7 +390,7 @@ categories:
 
 
 
-	
+
       * quicksort函数的if(r<=l)改为
 
 
@@ -411,8 +402,8 @@ categories:
 
 >     
 >     if(r - l <= M) {
->         return ;
->     }
+    >         return ;
+    >     }
 > 
 > 
 
@@ -428,65 +419,65 @@ categories:
 
 
 
-	
+
     1. 原理：基本的快排每次递归只能确定一个元素(划分元素)的最终位置，待排序数组中等于划分元素的其它元素的应该与划分元素相邻，可以利用这点进行优化，这样可以大幅度提高效率。代码如下：
 
 
 
 
-    
+
     void quickSortRepeat(item arr[], int l, int r)
     {
-    	if(!arr || r <= l) {
-    		return;
-    	}
-    	int i = l - 1;
-       	int j = r; 
-    	int k = 0;
-       	int p = l - 1;
-       	int q = r;
-    	item v = arr[r];
-    
-    	while(1) {
-    		while(arr[++i] < v) {
-    			;//空语句
-    		}
-    		while(v < arr[--j]) {
-    			if(j == l) {
-    				break;
-    			}
-    		}
-    		if(i >= j) {
-    			break;
-    		}
-    
-    		exchange(&arr[i], &arr[j]);
-    
-    		if(arr[i] == v) {
-    			p ++;
-    			exchange(&arr[p], &arr[i]);
-    		}
-    		if(arr[j] == v) {
-    			q --;
-    			exchange(&arr[q],&arr[j]);
-    		}
-    	}
-    
-    	//设置划分元素
-    	exchange(&arr[i],&arr[r]);
-    	j = i - 1;
-    	i ++;
-    
-    	//将与划分元素相等的元素放到划分元素两边
-    	for(k = l; k < p; k ++, j--) {
-    		exchange(&arr[k],&arr[j]);
-    	}
-    	for(k = r-1; k > q; k --, i ++) {
-    		exchange(&arr[k],&arr[i]);
-    	}
-    
-    	quickSortRepeat(arr,l,j);
-    	quickSortRepeat(arr,i,r);
+        if(!arr || r <= l) {
+            return;
+        }
+        int i = l - 1;
+        int j = r; 
+        int k = 0;
+        int p = l - 1;
+        int q = r;
+        item v = arr[r];
+
+        while(1) {
+            while(arr[++i] < v) {
+                ;//空语句
+            }
+            while(v < arr[--j]) {
+                if(j == l) {
+                    break;
+                }
+            }
+            if(i >= j) {
+                break;
+            }
+
+            exchange(&arr[i], &arr[j]);
+
+            if(arr[i] == v) {
+                p ++;
+                exchange(&arr[p], &arr[i]);
+            }
+            if(arr[j] == v) {
+                q --;
+                exchange(&arr[q],&arr[j]);
+            }
+        }
+
+        //设置划分元素
+        exchange(&arr[i],&arr[r]);
+        j = i - 1;
+        i ++;
+
+        //将与划分元素相等的元素放到划分元素两边
+        for(k = l; k < p; k ++, j--) {
+            exchange(&arr[k],&arr[j]);
+        }
+        for(k = r-1; k > q; k --, i ++) {
+            exchange(&arr[k],&arr[i]);
+        }
+
+        quickSortRepeat(arr,l,j);
+        quickSortRepeat(arr,i,r);
     }
 
 
@@ -533,31 +524,31 @@ categories:
 
 
 
-    
+
     /**
-     * 合并两个有序数组，使结果仍然有序
-     */
+    * 合并两个有序数组，使结果仍然有序
+    */
     void merge(item data[], int l, int m, int r)
     {
-    	if(m < l || r < m) {
-    		return;
-    	}
-    	item aux[NUM] = {0};
-    	int i = 0, j = 0, k = 0;
-    	for (i = m+1; i > l; i --) {
-    		aux[i-1] = data[i-1];
-    	}
-    	for (j = m; j < r; j ++) {
-    		aux[r+m-j] = data[j+1];
-    	}
-    
-    	for (k = l; k <= r; k ++) {
-    		if (aux[j] < aux[i]) {
-    			data[k] = aux[j--];
-    		} else {
-    			data[k] = aux[i++];
-    		}
-    	}
+        if(m < l || r < m) {
+            return;
+        }
+        item aux[NUM] = {0};
+        int i = 0, j = 0, k = 0;
+        for (i = m+1; i > l; i --) {
+            aux[i-1] = data[i-1];
+        }
+        for (j = m; j < r; j ++) {
+            aux[r+m-j] = data[j+1];
+        }
+
+        for (k = l; k <= r; k ++) {
+            if (aux[j] < aux[i]) {
+                data[k] = aux[j--];
+            } else {
+                data[k] = aux[i++];
+            }
+        }
     }
 
 
@@ -568,19 +559,19 @@ categories:
 
 
 
-    
+
     /**
-     * 采用递归，自顶向下归并排序
-     */
+    * 采用递归，自顶向下归并排序
+    */
     void mergeSortRecursion(item data[], int l, int r)
     {
-    	if (!data || r <= l) {
-    		return;
-    	}
-    	int m = l + (r-l) / 2;
-    	mergeSortRecursion(data, l, m);
-    	mergeSortRecursion(data, m+1, r);
-    	merge(data, l, m, r);
+        if (!data || r <= l) {
+            return;
+        }
+        int m = l + (r-l) / 2;
+        mergeSortRecursion(data, l, m);
+        mergeSortRecursion(data, m+1, r);
+        merge(data, l, m, r);
     }
 
 
@@ -590,18 +581,18 @@ categories:
 
 
 
-    
+
     /**
-     * 不用递归，自底向上进行归并排序
-     */
+    * 不用递归，自底向上进行归并排序
+    */
     void mergeSortNoRecursion(item data[], int l, int r)
     {
-    	int i = 0, m = 0;
-    	for (m = 1; m <= r-1; m += m) {
-    		for (i = l; i <= r-m; i += m+m) {
-    			merge(data, i, i+m-1, ((i+m+m-1) < r) ? i+m+m-1 : r);
-    		}
-    	}
+        int i = 0, m = 0;
+        for (m = 1; m <= r-1; m += m) {
+            for (i = l; i <= r-m; i += m+m) {
+                merge(data, i, i+m-1, ((i+m+m-1) < r) ? i+m+m-1 : r);
+            }
+        }
     }
 
 
@@ -610,10 +601,10 @@ categories:
 
 
 
-	
+
     1. 运行时间与NlgN成正比
 
-	
+
     2. 如果归并算法稳定，那么，归并排序是稳定的(本文所用归并算法并不稳定)
 
 
@@ -649,42 +640,42 @@ categories:
 
 大根堆中，树根节点保存当前堆中的最大值，如果每次取出该值，与堆中最后一个节点交换，然后，堆进行调整。取出堆中全部元素后，即排序完成，代码如下：
 
-    
+
     /**
-     * 如果节点的值小于其子节点，则向下调整
-     */
+    * 如果节点的值小于其子节点，则向下调整
+    */
     void fixDown(item data[], int k, int count)
     {
-    	int j = 0;
-    	while (2*k <= count) {
-    		j = 2 * k;
-    		if (j < count && data[j] < data[j+1]) {
-    			j ++;
-    		}
-    		if (data[k] >= data[j]) {
-    			break;
-    		}
-    		exchange(&data[k], &data[j]);
-    		k = j;
-    	}
+        int j = 0;
+        while (2*k <= count) {
+            j = 2 * k;
+            if (j < count && data[j] < data[j+1]) {
+                j ++;
+            }
+            if (data[k] >= data[j]) {
+                break;
+            }
+            exchange(&data[k], &data[j]);
+            k = j;
+        }
     }
-    
+
     /**
-     * 根节点保存当前堆中的最大值，每次取出根节点的值与最后一个节点交换，调整堆 
-     */
+    * 根节点保存当前堆中的最大值，每次取出根节点的值与最后一个节点交换，调整堆 
+    */
     void heapSort(item data[], int l, int r)
     {
-    	int k = 0;
-    	int count = r - l + 1;
-    	item *p = data + l - 1;
-    	for (k = count; k >= 1; k--) {
-    		fixDown(p, k, count);
-    	}
-    
-    	while (count > 1) {
-    		exchange(&p[1], &p[count]);
-    		fixDown(p, 1, --count);
-    	}
+        int k = 0;
+        int count = r - l + 1;
+        item *p = data + l - 1;
+        for (k = count; k >= 1; k--) {
+            fixDown(p, k, count);
+        }
+
+        while (count > 1) {
+            exchange(&p[1], &p[count]);
+            fixDown(p, 1, --count);
+        }
     }
 
 
@@ -703,10 +694,10 @@ categories:
 
 
 
-	
+
     1. **堆排序与归并排序：排序的(不)稳定性和是否需要额外空间。**
 
-	
+
     2. **堆排序与快速排序：平均情况和最坏情况的选择。**
 
 
