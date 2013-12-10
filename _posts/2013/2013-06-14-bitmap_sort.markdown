@@ -7,7 +7,7 @@ slug: bitmap_sort
 title: 位图排序
 wordpress_id: 114
 categories:
-- Programming
+- programming
 ---
 
 # 1. 题目：
@@ -25,9 +25,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 自己编写脚本产生随机数，由于最近在写PHP，就PHP吧，代码如下，没什么说的：<!-- more -->
 
-```php
-
-
+{% highlight php %}
     <?php
     $num = 800000;
     $data = array();
@@ -49,8 +47,7 @@ _要求：内存空间约1M，磁盘空间无限。_
     }
     fclose($file);
     ?>
-
-``` 
+{% endhighlight %}
 
 产生的数据保存在data.txt中，改变$num可以改变产生的随机数数量。需要的可以自己运行脚本产生数据进行测试，没有PHP环境的可以到[这里](http://pan.baidu.com/share/link?shareid=1848260083&uk=657450545)下载测试数据。
 
@@ -75,8 +72,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 
 
-```c
-
+{% highlight cpp %}
     #define NUM 10000000
     long int data[NUM] = {0};
     long int getData(char *file)
@@ -101,12 +97,12 @@ _要求：内存空间约1M，磁盘空间无限。_
         fclose(f);
         return i;
     }
-```
+{% endhighlight %}
 
 在C语言中，快排用qsort即可，于是，很容易写下如下程序
 
 
-    ```c
+{% highlight cpp %}
     #include <time.h>
     //asc
     int comp(const void *p, const void *q)
@@ -137,7 +133,7 @@ _要求：内存空间约1M，磁盘空间无限。_
         fclose(f);
         return 0;
     }
-    ```
+{% endhighlight %}
 
 
 上面是理想状态，但是
@@ -156,7 +152,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 于是，很容易写下操作位向量的相关代码：
 
-   ```c
+{% highlight cpp %}
     #define WORD 32
     
     //set the bit
@@ -174,13 +170,13 @@ _要求：内存空间约1M，磁盘空间无限。_
     {
         return result[i/WORD] & ( 1 << (i%WORD) );
     }
-   ```
+{% endhighlight %}
 
 
 可是，大多数资料上的代码是这样的：
 
     
-   ```c
+{% highlight cpp %}
     #define SHIFT 5
     
     #define MASK 0x1F
@@ -200,7 +196,7 @@ _要求：内存空间约1M，磁盘空间无限。_
     {
         return result[i>>SHIFT] & ( 1 << (i&MASK) );
     }
-   ```
+{% endhighlight %}
 
 
 其实，上述两段代码功能是一样的，i>>SHIFT，表示位运算i右移5位，25 = 32，表示i/32，举个例子，i=111，二进制表示为1101111，右移5位后，变成11，对应十进制3，刚好等于111/32。
@@ -212,9 +208,9 @@ _要求：内存空间约1M，磁盘空间无限。_
 从查到的资料来看，这涉及到效率问题了，**在现代架构中，位运算的速度比乘除法快很多，跟加减法差不多**。但是，我在这里对两种方法进行了测试，发现二者所需时间基本一致，测试方法如下面的程序所示。即使将
 
     
-    ```c
+{% highlight cpp %}
     finish = clock();
-    ```
+{% endhighlight %}
 
 
 放到最后也一样。
@@ -225,7 +221,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 最后，利用位运算进行排序，并测试结果，代码如下：
 
-   ```c
+{% highlight cpp %}
     #include <time.h>
     int main()
     {
@@ -281,7 +277,7 @@ _要求：内存空间约1M，磁盘空间无限。_
     
         return 0;
     }
-   ```
+{% endhighlight %}
 
 总结一下发现，采用位向量进行排序将时间复杂度降到了O(N)，同时，占用的空间也大大的减少了。
 
