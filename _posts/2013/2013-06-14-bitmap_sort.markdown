@@ -23,7 +23,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 # 2. 数据来源：
 
 
-自己编写脚本产生随机数，由于最近在写PHP，就PHP吧，代码如下，没什么说的：<!-- more -->
+自己编写脚本产生随机数，由于最近在写PHP，就PHP吧，代码如下，没什么说的：
 
 {% highlight php %}
     <?php
@@ -119,9 +119,9 @@ _要求：内存空间约1M，磁盘空间无限。_
         long int len = getData(file);
         qsort(data, len, sizeof(long int), comp);
     
-        finish = clock();
-        double duration = (double)(finish - start) / CLOCKS_PER_SEC;
-        printf("%lfs\n",duration);//显示运行时间
+        finish = clock();
+        double duration = (double)(finish - start) / CLOCKS_PER_SEC;
+        printf("%lfs\n",duration);//显示运行时间
     
         //保存结果，主要是为了测试
         FILE *f = fopen ("ans.txt","w");
