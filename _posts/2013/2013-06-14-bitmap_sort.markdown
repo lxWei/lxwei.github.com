@@ -72,8 +72,8 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 
 
-#define NUM 10000000
 {% highlight cpp %}
+#define NUM 10000000
     long int data[NUM] = {0};
     long int getData(char *file)
     {
@@ -102,8 +102,8 @@ _要求：内存空间约1M，磁盘空间无限。_
 在C语言中，快排用qsort即可，于是，很容易写下如下程序
 
 
-#include <time.h>
 {% highlight cpp %}
+#include <time.h>
     //asc
     int comp(const void *p, const void *q)
     {
