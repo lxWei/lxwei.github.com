@@ -7,37 +7,34 @@ slug: '262'
 title: 从源代码到可执行文件——编译全过程解析
 wordpress_id: 262
 categories:
-- 程序设计
+- programming
 ---
 
 程序的生命周期从一个高级C语言程序开始，这种形式能够被人读懂，却不能被机器读懂，为了在系统上运行这个程序，该源程序需要被其他程序转化为一系列低级机器语言指令，然后将这些指令按照可执行目标程序的格式打包并以二进制磁盘文件形式存储起来。
 
 在Linux系统下，可用以下指令完成源程序到目标程序的转化：
 
-    
-    gcc -o hello hello.c main.c
+>    gcc -o hello hello.c main.c
 
 
 gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编译、汇编、链接（分别使用预处理器、编译器、汇编器、链接器，这四个程序构成了编译系统）四个步骤，将其翻译成可执行目标程序hello。如下图所示：
 
-[![图表1](http://blog.loongxing.net/wp-content/uploads/2013/12/图表11.jpeg)](http://blog.loongxing.net/wp-content/uploads/2013/12/图表11.jpeg)
+[![编译流程](../../assets/img/2013/12/cc-process.jpeg)
 
 运行以下命令：
-
-    
-    gcc –help
+>>    gcc –help
 
 
 如下图所示，分别对应上图四个阶段：
 
-[![gcc选项](http://blog.loongxing.net/wp-content/uploads/2013/12/gcc选项1.png)](http://blog.loongxing.net/wp-content/uploads/2013/12/gcc选项1.png)
+[![gcc选项](../../assets/img/2013/12/gcc-option.png)
 
 
 # 1.示例程序
 
 
 
-    
+{% highlight cpp %}
     //main.c
     
     #include<stdio.h>
@@ -65,6 +62,7 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
     printf("Hello world\n");
     
     }
+{% endhighlight %}
 
 
 
@@ -77,15 +75,13 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 可执行以下命令查看程序变化：
 
-    
-    gcc -o main.i -E main.c
-    
-    gcc -o hello.i -E hello.c
+>    gcc -o main.i -E main.c
+>    gcc -o hello.i -E hello.c
 
 
 查看hello.i,如下图所示(main.i类似)：
 
-[![hello.i](http://blog.loongxing.net/wp-content/uploads/2013/12/hello.i1.png)](http://blog.loongxing.net/wp-content/uploads/2013/12/hello.i1.png)
+[![hello.i](../../assets/img/2013/12/hello.i.png)
 
 从上图可以看出，预处理只是对源文件进行了扩展，得到的仍然是C语言源程序。
 
@@ -97,13 +93,12 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 运行以下命令进行编译：
 
-    
-    gcc -S main.i hello.i
+>    gcc -S main.i hello.i
 
 
 查看main.s和hello.s：
 
-    
+{% highlight cpp %}
     //main.s
     
     .file "main.c"
@@ -213,7 +208,7 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
     .ident "GCC: (Ubuntu/Linaro 4.8.1-10ubuntu8) 4.8.1"
     
     .section .note.GNU-stack,"",@progbits
-
+{% endhighlight %}
 
 
 
@@ -224,8 +219,7 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 运行以下指令可得到重定位目标程序main.o和hello.o：
 
-    
-    gcc -c main.s hello.s
+>    gcc -c main.s hello.s
 
 
 用文本编辑器打开main.o和hello.o发现文件是乱码，因为此时已经是二进制文件。
@@ -236,12 +230,9 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 链接程序(LD）将main.o和hello.o以及一些其他必要的目标文件组合起来，创建可执行目标文件。
 
-    
-    gcc -o hello main.o hello.o
+>    gcc -o hello main.o hello.o
 
 
 得到可执行程序hello.
 
 在终端运行./hello，程序加载并运行，
-
-
