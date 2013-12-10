@@ -35,33 +35,22 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 
 {% highlight cpp %}
-    //main.c
-    
-    #include<stdio.h>
-    
-    void hello();
-    
-    int main()
-    
-    {
-    
-    hello();
-    
-    return 0;
-    
-    }
-    
-    //hello.c
-    
-    #include<stdio.h>
-    
-    void hello()
-    
-    {
-    
-    printf("Hello world\n");
-    
-    }
+ //main.c
+ #include<stdio.h>
+ void hello();
+ int main()
+ {
+     hello();
+     return 0;
+ }
+
+ //hello.c
+ #include<stdio.h>
+ void hello()
+ {
+     printf("Hello world\n");
+
+ }
 {% endhighlight %}
 
 
