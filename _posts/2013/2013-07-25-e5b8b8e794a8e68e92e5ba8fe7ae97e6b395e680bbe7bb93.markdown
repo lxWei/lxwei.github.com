@@ -16,7 +16,7 @@ categories:
 
 原理比较简单，每次循环选择最小的未排序元素将其放到未排序的最前或每次循环选择最大的未排序元素将其放到未排序的最后，进行N次循环即可。代码如下：
 
-```c++
+{% highlight cpp %} 
 void selectionSort(item data[], int l, int r)
 {
     int i = 0, j = 0;
@@ -30,7 +30,7 @@ void selectionSort(item data[], int l, int r)
         exchange(&data[i],&data[min]);
     }
 }
-```    
+{% endhighlight %}
 
 ## 1.1 适用场景
 
@@ -62,7 +62,7 @@ void selectionSort(item data[], int l, int r)
 
 原理比较简单，代码如下：<!-- more -->
 
-   ```c++
+{% highlight cpp %} 
    void insertionSort(item data[], int l, int r)
    {
        int i = 0;
@@ -88,7 +88,7 @@ void selectionSort(item data[], int l, int r)
            data[j] = v;
        }
    }
-   ``` 
+{% endhighlight %}
 
 
 注意：
@@ -128,7 +128,7 @@ void selectionSort(item data[], int l, int r)
 
 直接看代码：
 
-   ```c++
+{% highlight cpp %} 
    void bubbleSort(item data[], int l, int r)
    {
        int i = 0, j = 0;
@@ -140,7 +140,7 @@ void selectionSort(item data[], int l, int r)
            }
        }
    }
-   ``` 
+{% endhighlight %}
 
 
 ## 3.1 优化策略：
