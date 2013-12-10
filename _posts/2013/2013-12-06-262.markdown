@@ -19,7 +19,7 @@ categories:
 
 gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编译、汇编、链接（分别使用预处理器、编译器、汇编器、链接器，这四个程序构成了编译系统）四个步骤，将其翻译成可执行目标程序hello。如下图所示：
 
-[![编译流程](../../assets/img/2013/12/cc-process.jpeg)
+![编译流程](../../assets/img/2013/12/cc-process.jpeg)
 
 运行以下命令：
 >>    gcc –help
@@ -27,7 +27,7 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 如下图所示，分别对应上图四个阶段：
 
-[![gcc选项](../../assets/img/2013/12/gcc-option.png)
+![gcc选项](../../assets/img/2013/12/gcc-option.png)
 
 
 # 1.示例程序
@@ -70,7 +70,7 @@ gcc 编译器驱动程序读取源文件hello.c和main.c，经过预处理、编
 
 查看hello.i,如下图所示(main.i类似)：
 
-[![hello.i](../../assets/img/2013/12/hello.i.png)
+![hello.i](../../assets/img/2013/12/hello.i.png)
 
 从上图可以看出，预处理只是对源文件进行了扩展，得到的仍然是C语言源程序。
 
