@@ -1,5 +1,5 @@
 ---
-author: wlxwolves
+author: lxWei
 comments: true
 date: 2013-07-31 14:38:41+00:00
 layout: post
@@ -7,12 +7,12 @@ slug: '%e8%af%bb%e3%80%8a%e5%a4%a7%e8%a7%84%e6%a8%a1web%e6%9c%8d%e5%8a%a1%e5%bc%
 title: 读《大规模Web服务开发技术》
 wordpress_id: 216
 categories:
-- 技术博客
-- 读书笔记
+- reading
+- system
 ---
 
 > 问：大规模web服务环境中，由于I/O负载问题，服务器变得很慢，怎么办？
-答：加服务器！！！
+> 答：加服务器！！！
 
 
 如果你的答案跟上边一样，那么，极度推荐你读读这本书。
@@ -27,7 +27,6 @@ categories:
 
 一句话：这本书极度适合本人这种没有大规模web开发经验而又有志向这方面发展的菜鸟学生。本书扉页所书“Web开发人员必读”并没有言过其实。
 
-<!-- more -->
 
 
 # 2. 大规模数据处理难点
