@@ -360,38 +360,15 @@ void selectionSort(item data[], int l, int r)
     1. 原理：递归过程会产生很多小的数组，即r-l比较小，会占用大量空间和时间，可以针对此对其进行改进。
     2. 优化方案：
       * quicksort函数的if(r<=l)改为
-> 
-
->     
->     if(r - l <= M) {
-    >         insertionSort(data,l,r);
-    >     }
-> 
-> 
-
+>      if(r - l <= M) {
+>          insertionSort(data,l,r);
+>      }
 
 其中， M表示一个小正整数，如5-25。
-
-
-
-
-
-
       * quicksort函数的if(r<=l)改为
-
-
-
-
-
-
-> 
-
->     
->     if(r - l <= M) {
-    >         return ;
-    >     }
-> 
-> 
+>      if(r - l <= M) {
+>          return ;
+>      }
 
 
 
