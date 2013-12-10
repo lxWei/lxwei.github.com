@@ -73,7 +73,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 
 {% highlight cpp %}
-    \#define NUM 10000000
+    #define NUM 10000000
     long int data[NUM] = {0};
     long int getData(char *file)
     {
@@ -103,7 +103,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 
 
 {% highlight cpp %}
-    \#include <time.h>
+    #include <time.h>
     //asc
     int comp(const void *p, const void *q)
     {
@@ -177,9 +177,9 @@ _要求：内存空间约1M，磁盘空间无限。_
 
     
 {% highlight cpp %}
-    \#define SHIFT 5
+    #define SHIFT 5
     
-    \#define MASK 0x1F
+    #define MASK 0x1F
     
     //set the bit
     void set(long int i)
@@ -222,7 +222,7 @@ _要求：内存空间约1M，磁盘空间无限。_
 最后，利用位运算进行排序，并测试结果，代码如下：
 
 {% highlight cpp %}
-    \#include <time.h>
+    #include <time.h>
     int main()
     {
         char *file = "data.txt";
