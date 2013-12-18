@@ -11,13 +11,13 @@ categories:
 每个想写出优美代码的程序员都应该好好读读《Clean Code》。
 烂代码会造成效率降低和成本提高，有时，甚至有关生存。
 注：因为读的是英文版Clean Code，本文有些翻译可能与中文版不一致，我会在文中适当注明英文。
-# 目录 ???????????????????????????????????????/xiugai mu lu 
-[有意义的命名](./2013-12-18-cleanCode.markdown/\#meaningfulName)
+# 目录 
+[有意义的命名](./\#meaningfulName)
 
 
 
 
-# 2. [有意义的命名](./2013-12-18-cleanCode.markdown/\#meaningfulName) ????xiugai lianjie
+# 2. [有意义的命名](./\#meaningfulName) 
 ## 2.1 使用名副其实的名字
 
 标识符名字必须能够反映作者意图，如果一个标识符需要注释，那么，这个标识符命名就没能反映作者意图，需要进行修改。
