@@ -1,8 +1,9 @@
 ---
 layout: post
 comments: true
+date: 2013-12-18 22:22:41+00:00
 title: 读薄《代码整洁之道》—— Clean Code 
-category:  
+categories:  
 - reading
 - programming
 
