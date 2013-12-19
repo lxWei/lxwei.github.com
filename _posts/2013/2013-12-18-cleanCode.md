@@ -9,14 +9,15 @@ categories:
 
 ---
 每个想写出优美代码的程序员都应该好好读读《Clean Code》。
+
 注：因为读的是英文版Clean Code，本文有些翻译可能与中文版不一致，我会在文中适当注明英文。
 # 目录 
-[有意义的命名](cleancode.html/\#meaningfulName)
+[有意义的命名](\#meaningfulName)
 
 
 
 
-# 2. [有意义的命名](cleancode.html/\#meaningfulName) 
+# 2. <a name="\#meaningfulName">有意义的命名</a> 
 ## 2.1 使用名副其实的名字
 
 标识符名字必须能够反映作者意图，如果一个标识符需要注释，那么，这个标识符命名就没能反映作者意图，需要进行修改。
