@@ -12,11 +12,9 @@ categories:
 
 注：因为读的是英文版Clean Code，本文有些翻译可能与中文版不一致，我会在文中适当注明英文。
 # 目录 
-[综述](#brief)
-
-[有意义的命名](#meaningfulName)
-
-[函数](#function)
+* [综述](#brief)
+* [有意义的命名](#meaningfulName)
+* [函数](#function)
 
 # <a id="#brief">  1. 综述 </a>
 
