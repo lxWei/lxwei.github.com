@@ -1,6 +1,7 @@
 ---
 layout: post
 category:  Life
+comments: true
 title: My first blog with jekyll
 ---
 
