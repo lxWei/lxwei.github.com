@@ -49,8 +49,9 @@ h3{
 
 /* fixed navbar*/
 body {
-    background:url(../img/background.jpg) no-repeat 0 0 #fff;
+/*    background:url(../img/background.jpg) no-repeat 0 0 #fff;
     background-attachment:fixed;
+    */
     padding-top: 40px;
 }
 
