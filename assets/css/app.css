@@ -20,6 +20,10 @@ h3{
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
+#post {
+    background: white;
+    padding: 10px 10px 10px 10px;
+}
 
 #post .authoring{
   margin-bottom: 17px;
