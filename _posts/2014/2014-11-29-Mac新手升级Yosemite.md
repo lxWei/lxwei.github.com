@@ -60,7 +60,7 @@ Mac自带了PHP，但是，为了后面统一采用Homebrew对开发环境进行
 >php -v
 
 查看到php版本是5.5.19，然后运行命令：
->whereis php
+>which php
 
 发现是/usr/bin/php，然后使用locate命令查看，发现只有系统自带的php了，**通过Homebrew自行安装的php没了，没了**！
 
@@ -90,6 +90,7 @@ php info.php
 
 上网搜了下，估计是两个php 5.4引起的，所以，先删除一个再说，反正多一个也没用，再试下。运行
 >brew remove php54
+
 >php info.php
 
 搞定，至少不再报错。可是查看php版本，依然是5.5.19，既然Mac下会把Homebrew安装的程序链接到```/usr/local/bin```下，所以，我去```/usr/local/bin```下查看，但没有发现php，所以，自己在/usr/local/bin 目录下搞了个软链接
@@ -97,7 +98,9 @@ php info.php
 
 然后，执行
 >cd ~
+
 >source .profile
+
 >php -v
 
 5.4.32回来了！
