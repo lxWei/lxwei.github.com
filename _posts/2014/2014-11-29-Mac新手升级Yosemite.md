@@ -77,7 +77,31 @@ Mac自带了PHP，但是，为了后面统一采用Homebrew对开发环境进行
 
 !["/usr/local/opt/icu4c/lib/libicui18n.53.dylib" doesn't exist](http://lxweiblog.qiniudn.com/2014-libicui18n.53.dylib.jpg)
 
-居然报错，放Google，搜到[答案][6]，按照提示操作，如上图所示，再次，启动，Done。哈哈，一切正常了。
+居然报错，放Google，搜到[答案][6]，按照提示操作，如上图所示，再次，启动，Done。哈哈，一切正常了，至少看起来是这样。
+
+然后，我运行
+>php -v
+
+居然是5.5.19，然后运行
+php info.php
+
+报错：
+>dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.53.dylib
+
+上网搜了下，估计是两个php 5.4引起的，所以，先删除一个再说，反正多一个也没用，再试下。运行
+>brew remove php54
+>php info.php
+
+搞定，至少不再报错。可是查看php版本，依然是5.5.19，既然Mac下会把Homebrew安装的程序链接到```/usr/local/bin```下，所以，我去```/usr/local/bin```下查看，但没有发现php，所以，自己在/usr/local/bin 目录下搞了个软链接
+>ln -s ../Cellar/php54/5.4.32/bin/php php
+
+然后，执行
+>cd ~
+>source .profile
+>php -v
+
+5.4.32回来了！
+
 
 # <a id="summary">  4.总结</a>
 折腾了大半天，系统暂时好了，那么，问题来了：
