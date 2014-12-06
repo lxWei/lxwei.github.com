@@ -23,7 +23,7 @@ categories:
 
 可以采用在线升级的方法，[官网][2]有教程。为了节省下载时间，我找某大师拷贝了个安装镜像，然后一路继续，经过多次重启电脑之后，终于进去了，界面不错。
 
-![桌面截图](http://lxweiblog.qiniudn.com/2014-Yosemite_screen.png)
+![桌面截图](http://blog2014.qiniudn.com/12-Yosemite_screen.png)
 
 高兴劲儿还没过，就发现问题来了。可是没有备份，回不去了，只能硬着头皮往下走。备份多重要啊！
 
@@ -66,7 +66,7 @@ Mac自带了PHP，但是，为了后面统一采用Homebrew对开发环境进行
 
 没有了再装就是了，所以，我很快使用```brew install php54```重装了php5.4，然后，居然还是找不到，但是，我在```/usr/local/Cellar/php54/```文件夹下找到了5.4.32和5.4.35两个版本，原来5.4.32一直都在，只是我没去找而已！具体文件如下图所示：
 
-![php-fpm](http://lxweiblog.qiniudn.com/2014-php-fpm.jpg)
+![php-fpm](http://blog2014.qiniudn.com/12-php-fpm.jpg)
 
 然后，我运行
 >php -v
@@ -75,7 +75,7 @@ Mac自带了PHP，但是，为了后面统一采用Homebrew对开发环境进行
 
 然后，我到5.4.32目录下直接运行php-fpm:
 
-!["/usr/local/opt/icu4c/lib/libicui18n.53.dylib" doesn't exist](http://lxweiblog.qiniudn.com/2014-libicui18n.53.dylib.jpg)
+!["/usr/local/opt/icu4c/lib/libicui18n.53.dylib" doesn't exist](http://blog2014.qiniudn.com/12-libicui18n.53.dylib.jpg)
 
 居然报错，放Google，搜到[答案][6]，按照提示操作，如上图所示，再次，启动，Done。哈哈，一切正常了，至少看起来是这样。
 
