@@ -43,6 +43,7 @@ Saiku 提供JDBC 和 ODBC 接口，可以连接很多的数据源，既可以连
 由于 Saiku+MySQL 的性能问题，又尝试了 Saiku+Spark 的方案，数据存储于 Hive，分析引擎使用 Spark，在这种情况下，可以处理大数据量的查询分析，大部分查询都会在几十秒到几分钟内返回结果，如果数据量太大，也会存在执行失败的情况。所以，开始探索其他方案。
 
 # Kylin 
+
 >Apache Kylin™ is an open source Distributed Analytics Engine designed to provide SQL interface and multi-dimensional analysis (OLAP) on Hadoop supporting extremely large datasets, original contributed from eBay Inc.
 
 [Kylin][3] 相对于其他OLAP分析引擎，一个重要特点是采用空间换时间，根据定义的cube进行预计算，并将计算结果存储到Hbase中，在进行查询时，直接查询Hbase，所以，Kylin 的查询可以到毫秒级，性能完全不是问题。
