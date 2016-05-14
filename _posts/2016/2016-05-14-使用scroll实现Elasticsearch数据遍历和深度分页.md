@@ -9,7 +9,7 @@ categories:
 
 ---
 # 背景
-Elasticsearch 是一个实时的分布式搜索与分析引擎，被广泛用来做全文搜索、结构化搜索与分析。在使用过程中，有一些典型的使用场景，比如分页、遍历等。在使用关系型数据库中，我们被告知要注意甚至被明确禁止使用深度分页，同理，在 Elasticsearch 中，也应该尽量避免使用深度分页。这篇文章主要介绍 Elasticsearch 中使用分页的方式、Elasticsearch 搜索执行过程以及为什么深度分页应该被禁止，最后再介绍使用 scroll 的方式遍历index。
+Elasticsearch 是一个实时的分布式搜索与分析引擎，被广泛用来做全文搜索、结构化搜索、分析。在使用过程中，有一些典型的使用场景，比如分页、遍历等。在使用关系型数据库中，我们被告知要注意甚至被明确禁止使用深度分页，同理，在 Elasticsearch 中，也应该尽量避免使用深度分页。这篇文章主要介绍 Elasticsearch 中使用分页的方式、Elasticsearch 搜索执行过程以及为什么深度分页应该被禁止，最后再介绍使用 scroll 的方式遍历数据。
 
 # Elasticsearch 搜索内部执行原理
 一个最基本的 Elasticsearch 查询语句是这样的：
@@ -54,7 +54,7 @@ query 阶段知道了要取哪些数据，但是并没有取具体的数据，�
 2. shard 根据 doc 的 _id 取到数据详情，然后返回给 coordinating node。
 3. coordinating node 返回数据给 Client。
 
-coordinating node 的优先级队列里有 from + size 个 doc _id，但是，在 fetch 阶段，并不需要取回所有数据，在上面的例子中，前100条数据是不需要取的，只需要取优先级队列里的第101到110条数据即可。
+coordinating node 的优先级队列里有 from + size 个 _doc _id，但是，在 fetch 阶段，并不需要取回所有数据，在上面的例子中，前100条数据是不需要取的，只需要取优先级队列里的第101到110条数据即可。
 
 需要取的数据可能在不同分片，也可能在同一分片，coordinating node 使用 `multi-get` 来避免多次去同一分片取数据，从而提高性能。
 
@@ -67,11 +67,11 @@ Elasticsearch 的这种方式提供了分页的功能，同时，也有相应的
 * IO
 * 网络带宽
 
-CPU、内存和IO消耗容易理解，网络带宽问题稍难理解一点。在 query 阶段，每个shards需要返回 1,000,100 条数据给 coordinating node，而 coordinating node 需要接收 10 * 1,000,100 条数据，即使每条数据只有doc _id 和 _score，这数据量也很大了，而且，这才一个查询请求，那如果再乘以100呢？
+CPU、内存和IO消耗容易理解，网络带宽问题稍难理解一点。在 query 阶段，每个shards需要返回 1,000,100 条数据给 coordinating node，而 coordinating node 需要接收 10 * 1,000,100 条数据，即使每条数据只有 _doc _id 和 _score，这数据量也很大了，而且，这才一个查询请求，那如果再乘以100呢？
 
 在另一方面，我们意识到，这种深度分页的请求并不合理，因为我们是很少人为的看很后面的请求的，在很多的业务场景中，都直接限制分页，比如只能看前100页。
 
-不过，这种深度分页确实存在，比如，被爬虫了，这个时候，直接干掉深度分页就好；又或者，业务上有遍历数据的需要，比如，有1千万粉丝的微信大V，要给所有粉丝群发消息，这时候就需要遍历所有粉丝，而最容易想到的就是利用 from + size 来实现，不过，这个是不现实的，这时，可以采用 Elasticsearch 提供的 scroll 方式来实现遍历。
+不过，这种深度分页确实存在，比如，被爬虫了，这个时候，直接干掉深度分页就好；又或者，业务上有遍历数据的需要，比如，有1千万粉丝的微信大V，要给所有粉丝群发消息，或者给某省粉丝群发，这时候就需要取得所有符合条件的粉丝，而最容易想到的就是利用 from + size 来实现，不过，这个是不现实的，这时，可以采用 Elasticsearch 提供的 scroll 方式来实现遍历。
 
 
 # 利用 scroll 遍历数据
@@ -80,7 +80,7 @@ CPU、内存和IO消耗容易理解，网络带宽问题稍难理解一点。在
 可以把 scroll 分为初始化和遍历两步，初始化时将所有符合搜索条件的搜索结果缓存起来，可以想象成快照，在遍历时，从这个快照里取数据，也就是说，在初始化后对索引插入、删除、更新数据都不会影响遍历结果。
 
 ## 使用介绍
-##### 初始化
+### 初始化
 
 ```
 POST ip:port/my_index/my_type/_search?scroll=1m
@@ -92,14 +92,15 @@ POST ip:port/my_index/my_type/_search?scroll=1m
 
 初始化返回一个 _scroll_id，_scroll_id 用来下次取数据用。
 
-##### 遍历
+### 遍历
+
 ```
 POST /_search?scroll=1m
 {
     "scroll_id":"XXXXXXXXXXXXXXXXXXXXXXX I am scroll id XXXXXXXXXXXXXXX"
 }
 ```
-这里的 scroll_id 即 上一次遍历取回的 _scroll_id 或者是初始化返回的 _scroll_id，同样的，需要带 scroll 参数。 重复这一步骤，直到返回的数据为空，即遍历完成。***注意，每次都要传参数 scroll，刷新搜索结果的缓存时间***。
+这里的 scroll_id 即 上一次遍历取回的 _scroll_id 或者是初始化返回的 _scroll_id，同样的，需要带 scroll 参数。 重复这一步骤，直到返回的数据为空，即遍历完成。***注意，每次都要传参数 scroll，刷新搜索结果的缓存时间***。另外，***不需要指定 index 和 type***
 
 ## Scroll-Scan
 Elasticsearch 提供了 Scroll-Scan 方式进一步提高遍历性能。还是上面的例子，微信大V要给粉丝群发这种后台任务，是不需要关注顺序的，只要能遍历所有数据即可，这时候，就可以用Scroll-Scan。
@@ -120,12 +121,13 @@ POST ip:port/my_index/my_type/_search?search_type=scan&scroll=1m&size=50
 
 Scroll-Scan 方式与普通 scroll 有几点不同：
 
-1. Scroll-Scan 结果没有排序，按 index 顺序返回。
+1. Scroll-Scan 结果没有排序，按 index 顺序返回，没有排序，可以提高取数据性能。
 2. 初始化时只返回 _scroll_id，没有具体的 hits 结果。
 3. size 控制的是每个分片的返回的数据量而不是整个请求返回的数据量。
 
 ## Java 实现
-##### 初始化
+### 初始化
+
 ```
 try {
     response = esClient.prepareSearch(index)
@@ -140,9 +142,11 @@ try {
     // handle Exception
 }  
 ```
+
 初始化返回 _scroll_id，然后，用 _scroll_id 去遍历，注意，上面的query是一个JSONObject，不过这里很多种实现方式，我这儿只是个例子。
 
-##### 遍历
+### 遍历
+
 ```
 try {
     response = esClient.prepareSearchScroll(scrollId)
@@ -158,9 +162,11 @@ try {
 1. 深度分页不管是关系型数据库还是Elasticsearch还是其他搜索引擎，都会带来巨大性能开销，特别是在分布式情况下。
 2. 有些问题可以考业务解决而不是靠技术解决，比如很多业务都对页码有限制，google 搜索，往后翻到一定页码就不行了。
 3. Elasticsearch 提供的 Scroll 接口专门用来获取大量数据甚至全部数据，在顺序无关情况下，首推Scroll-Scan。
-4. 
+4. 描述搜索过程时，为了简化描述，假设 index 没有备份，实际上，index 肯定会有备份，这时候，就涉及到选择 shard。
 
 ***One more thing***：Elasticsearch 各个版本可能有区别，但原理基本相同，本文包括文末的代码都基于Elasticsearch 1.3。
+
+
 
 
 
