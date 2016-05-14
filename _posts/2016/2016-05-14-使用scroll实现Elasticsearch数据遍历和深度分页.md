@@ -94,6 +94,7 @@ POST ip:port/my_index/my_type/_search?scroll=1m
 
 初始化返回一个 _scroll_id，_scroll_id 用来下次取数据用。
 
+
 ### 遍历
 
 ```
@@ -102,7 +103,10 @@ POST /_search?scroll=1m
     "scroll_id":"XXXXXXXXXXXXXXXXXXXXXXX I am scroll id XXXXXXXXXXXXXXX"
 }
 ```
-这里的 scroll_id 即 上一次遍历取回的 _scroll_id 或者是初始化返回的 _scroll_id，同样的，需要带 scroll 参数。 重复这一步骤，直到返回的数据为空，即遍历完成。***注意，每次都要传参数 scroll，刷新搜索结果的缓存时间***。另外，***不需要指定 index 和 type***
+这里的 scroll_id 即 上一次遍历取回的 _scroll_id 或者是初始化返回的 _scroll_id，同样的，需要带 scroll 参数。 重复这一步骤，直到返回的数据为空，即遍历完成。***注意，每次都要传参数 scroll，刷新搜索结果的缓存时间***。另外，***不需要指定 index 和 type***。
+
+设置scroll的时候，需要使搜索结果缓存到下一次遍历完成，同时，也不能太长，毕竟空间有限。
+
 
 ## Scroll-Scan
 Elasticsearch 提供了 Scroll-Scan 方式进一步提高遍历性能。还是上面的例子，微信大V要给粉丝群发这种后台任务，是不需要关注顺序的，只要能遍历所有数据即可，这时候，就可以用Scroll-Scan。
