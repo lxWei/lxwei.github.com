@@ -168,7 +168,11 @@ try {
 3. Elasticsearch 提供的 Scroll 接口专门用来获取大量数据甚至全部数据，在顺序无关情况下，首推Scroll-Scan。
 4. 描述搜索过程时，为了简化描述，假设 index 没有备份，实际上，index 肯定会有备份，这时候，就涉及到选择 shard。
 
-***One more thing***：Elasticsearch 各个版本可能有区别，但原理基本相同，本文包括文末的代码都基于Elasticsearch 1.3。
+***PS***：Elasticsearch 各个版本可能有区别，但原理基本相同，本文包括文末的代码都基于Elasticsearch 1.3。
+
+`***One more thing***`: [We are hiring][3]
+
+[3]: http://job.youzan.com/?user=konggu#64 "hire"
 
 
 
