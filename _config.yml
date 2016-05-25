@@ -5,7 +5,7 @@ auto: true
 rdiscount:
   extensions: [smart]
 
-title: lxWei's Blog
+title: 星爷的博客
 author:
   name: lxWei
   email: longxingwei@gmail.com
