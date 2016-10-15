@@ -32,7 +32,7 @@ Elasticsearch 在公司的使用越来越广，很多同事之前并没有接触
 ![Elasticsearch 插件head截图][1]
 
 * node：即一个 Elasticsearch 的运行实例，使用多播或单播方式发现 cluster 并加入。
-* cluster：包含一个或多个拥有相同集群名称的 node，其中包含至少一个master node。
+* cluster：包含一个或多个拥有相同集群名称的 node，其中包含一个master node。
 * index：类比关系型数据库里的DB，是一个逻辑命名空间。
 * alias：可以给 index 添加零个或多个alias，通过 alias 使用index 和根据index name 访问index一样，但是，alias给我们提供了一种切换index的能力，比如重建了index，取名customer_online_v2，这时，有了alias，我要访问新 index，只需要把 alias 添加到新 index 即可，并把alias从旧的 index 删除。不用修改代码。
 * type：类比关系数据库里的Table。其中，一个index可以定义多个type，但一般使用习惯仅配一个type。
@@ -45,9 +45,11 @@ Elasticsearch 在公司的使用越来越广，很多同事之前并没有接触
 
 下表用Elasticsearch 和 关系数据库做了类比：
 
-| Elasticsearch | index    | type  | field | document | mapping |
-| ------------- | -------- | ----- | ----- | -------- | ------- |
-| DB            | database | table | field | record   | schema  |
+* index => databases
+* type => table
+* field => field
+* document => record
+* mapping => schema
 
 最后，来从 Elasticsearch 中取出一条数据（document）看看：
 
@@ -87,13 +89,15 @@ filter 正如其字面意思“过滤”所说的，是起过滤的作用，任�
 
 ### 4.3.1 match_all
 
-```{"match_all": {}}```
+```json
+{"match_all":{}}
+```
 
 表示取出所有documents，在与filter结合使用时，会经常使用match_all。
 
 ### 4.3.2 match
 
-一般在全文检索时使用，首先利用analyzer 对具体查询字符串进行分析，然后进行查询；如果是在数值型字段、日期类型字段、布尔字段或not_analyzed 的字符串上进行查询时，不对查询字符串进行分析，表示精确匹配，一个简单的例子如：
+一般在全文检索时使用，首先利用analyzer 对具体查询字符串进行分析，然后进行查询；如果是在数值型字段、日期类型字段、布尔字段或not_analyzed 的字符串上进行查询时，不对查询字符串进行分析，表示精确匹配，两个简单的例子如：
 
 ```json
 { "match": { "tweet": "About Search" }}
@@ -155,6 +159,43 @@ exists 用于查找字段含有一个或多个值的document，而missing用于�
 }
 ```
 
+### 4.3.7 bool
+
+前面讲的都是些最原子的查询子句，那么，怎么实现复合查询呢？Elasticsearch 使用bool 子句来将各种子查询关联起来，组成布尔表达式，bool 子句可以随意组合、嵌套。
+
+bool子句主要包括：
+
+1. must：表示必须匹配。
+2. must_not：表示一定不能匹配。
+3. should：表示可以匹配，类似于布尔运算里的"或"。如果bool 子句里，没有must子句，那么，should子句里至少匹配一个，如果有must子句，那么，should子句至少匹配零个。可以使用```minimum_should_match``` 来对最小匹配数进行设置。
+
+```json
+{
+    "bool" : {
+        "must" : {
+            "term" : { "user" : "kimchy" }
+        },
+        "must_not" : {
+            "range" : {
+                "age" : { "from" : 10, "to" : 20 }
+            }
+        },
+        "should" : [
+            {
+                "term" : { "tag" : "wow" }
+            },
+            {
+                "term" : { "tag" : "elasticsearch" }
+            }
+        ],
+        "minimum_should_match" : 1,
+        "boost" : 1.0
+    }
+}
+```
+
+
+
 ## 4.4 聚合功能
 
 前面说的都是 Elasticsearch 当做搜索引擎使用，Elasticsearch 还可以作为分析引擎使用。
@@ -177,7 +218,9 @@ Elasticsearch 还提供了基于地理位置的搜索，而且能将地理位置
 
 **terms 问题**： terms 里可以传多个值，但是，量不能太多，搜索引擎的基本数据结构是倒排索引，terms 里传多个值，原理上来说是查很多的倒排索引，量大了也会给系统带来很大压力。
 
+# 6 总结
 
+本文是一篇 Elasticsearch 的入门文章，涵盖的是一些基本概念，篇幅有限，并不深入，如DSL的具体语法、聚合功能等都点到为止，希望大家知道的是Elasticsearch能干什么，具体要做的时候，再去详查就好了。
 
 [1]: http://7sbmb0.com1.z0.glb.clouddn.com/es-head.jpeg	"head"
 [2]: http://7sbmb0.com1.z0.glb.clouddn.com/es-result.png	"es result"
