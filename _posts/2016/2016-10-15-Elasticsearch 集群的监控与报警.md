@@ -43,7 +43,7 @@ categories:
 
 **网关监控**
 
-网关监控，主要关注两个指标，RT和状态吗，当RT > 1s 或者出现5XX的时候，进行报警。
+网关监控，主要关注两个指标，RT和状态码，当RT > 1s 或者出现5XX的时候，进行报警。
 
 **AS监控**
 
@@ -91,7 +91,7 @@ Elasticsearch 提供了丰富的API接口以便于采集集群、node、index等
 indices部分如下：
 
 ```json
-       "indices": {
+  		"indices": {
             "docs": {
                "count": 3344,
                "deleted": 983
@@ -188,7 +188,7 @@ indices部分如下：
          }
 ```
 
-* doc 部分显示node中的所有documents数量，以及已经被标记删除的。
+* doc 部分显示node中的所有documents数量，以及已经被标记删除的。当每分钟被标记删除的数量突然增大时，需要关注下。
 
 
 * store显示物理存储信息。
@@ -237,7 +237,7 @@ Elasticsearch 自身维护它的线程池，一般来讲，我们不需要配置
          }
 ```
 
-简单来说，fielddata的大小只有在加载完了之后才会知道，如果fielddata的大小比分配内存还打，那就会导致OOM，于是，Elasticsearch 引入了断路器，用于预先估算内存够不够，如果不够，断路器就会被触发(tripped)并返回异常，而不至于导致OOM。
+简单来说，fielddata的大小只有在加载完了之后才会知道，如果fielddata的大小比分配内存还大，那就会导致OOM，于是，Elasticsearch 引入了断路器，用于预先估算内存够不够，如果不够，断路器就会被触发(tripped)并返回异常，而不至于导致OOM。
 
 所以，这个指标里，最重要的就是 ```tripped```了，如果这个值很大或者说一直在增长，那么，就说明你的查询需要优化或者说需要更多内存了。
 
