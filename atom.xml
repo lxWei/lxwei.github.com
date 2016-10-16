@@ -11,7 +11,7 @@ title: Atom Feed
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>{{ site.production_url }}</id>
  <author>
-   <name>lxWei</name>
+   <name>星爷</name>
    <email>longxingwei@gmail.com</email>
  </author>
 
