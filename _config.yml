@@ -14,3 +14,5 @@ author:
 production_url: http://lxWei.github.io
 
 baseurl: /
+
+theme: jekyll-theme-tactile
