@@ -76,12 +76,19 @@ object Example {
 打包采用sbt，运行`sbt package`.
 
 > ***sbt package***
+>
 > [info] Loading global plugins from /Users/ldtech/.sbt/0.13/plugins
-> [info] Loading project definition from /Users/ldtech/learn/spark/spark-template-lxwei/project
-> [info] Set current project to spark (in build file:/Users/ldtech/learn/spark/spark-template-lxwei/)
-> [info] Compiling 1 Scala source to /Users/ldtech/learn/spark/spark-template-lxwei/target/scala-2.11/classes...
+>
+> [info] Loading project definition from $SomePlace/spark-template-lxwei/project
+>
+> [info] Set current project to spark (in build file:$SomePlace/spark-template-lxwei/)
+>
+> [info] Compiling 1 Scala source to $SomePlace/spark-template-lxwei/target/scala-2.11/classes...
+>
 > [info] Packaging $SomePlace/spark-template-lxwei/target/scala-2.11/spark_2.11-1.0.jar ...
+>
 > [info] Done packaging.
+>
 > [success] Total time: 5 s, completed 2017-10-24 22:24:44
 
 可以看到，打包生成的jar包为`$SomePlace/spark-template-lxwei/target/scala-2.11/spark_2.11-1.0.jar` 。
@@ -94,23 +101,23 @@ object Example {
 
 其中，spark-submit有多个参数：
 
-* —class: 应用程序入口。
-* —master: 集群的master地址，如spark://XXXXXX:7077；或者使用local模式在本地单线程运行，或使用 local[N] 在本地以N个线程运行。其中，local模式主要用于测试。
-* —deploy-mode: 集群的部署模式，分为 Client 模式（默认）和 Cluster 模式。
-* —application-jar: 包含应用程序和所有依赖的jar包的路径。
-* —application-arguments: 传给主类main函数的参数。
+* --class: 应用程序入口。
+* --master: 集群的master地址，如spark://XXXXXX:7077；或者使用local模式在本地单线程运行，或使用 local[N] 在本地以N个线程运行。其中，local模式主要用于测试。
+* --deploy-mode: 集群的部署模式，分为 Client 模式（默认）和 Cluster 模式。
+* --application-jar: 包含应用程序和所有依赖的jar包的路径。
+* --application-arguments: 传给主类main函数的参数。
 
 举例来说，假设我们采用Yarn运行Spark，提交命令可以为
 
 > spark-submit \
 >
-> —class "io.github.lxwei.Example" \
+> --class "io.github.lxwei.Example" \
 >
-> —master yarn-cluster \
+> --master yarn-cluster \
 >
-> —executor-memory 2G \
+> --executor-memory 2G \
 >
-> —number-executors 10 \
+> --number-executors 10 \
 >
 > $SomePlace/spark-template-lxwei/target/scala-2.11/spark_2.11-1.0.jar
 
