@@ -39,7 +39,7 @@ Cassandra提供了两种replication 策略：
 * SimpleStrategy: 仅适用于单datacenter 单 rack。根据partitioner存储第一份replica，然后在顺时针方向的下一个node上存放下一份replica（不考虑网络拓扑信息）。
 * NetworkTopologyStrategy: 可以方便的扩展到多datacenter，推荐使用，同时，NetworkTopologyStrategy尽量避免将数据存储到相同的rack上。
 
-#3. Snitches
+# 3. Snitches
 
 snitch 决定了node属于哪个datacenter的哪个rack。可以用于告知Cassandra集群网络拓扑信息，以实现高效的请求路由与分发、备份数据。
 

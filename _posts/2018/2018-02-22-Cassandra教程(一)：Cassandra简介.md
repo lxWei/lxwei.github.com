@@ -8,11 +8,11 @@ categories:
 - Big Data
 ---
 
-#Overview
+# Overview
 
 Apache Cassandra 是一个大规模可扩展的分布式开源NoSQL数据库，完美适用于跨数据中心／云端的结构化数据、半结构化数据和非结构化数据，同时，Cassandra 高可用、线性可扩展、高性能、无单点。
 
-##特点
+## 特点
 
 * scalable，线性可扩展
 * fault-tolerant，且没有单点（peer-to-peer）

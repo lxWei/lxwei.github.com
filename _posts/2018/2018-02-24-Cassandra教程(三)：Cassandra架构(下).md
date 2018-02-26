@@ -52,9 +52,9 @@ Cassandra 删除数据时使用tombstone，tombstone是一个标记，标记colu
 
 根据 [CAP][3] 理论，Cassandra 是一个AP系统，提供最终一致性。同时，Cassandra可以灵活配置，使系统更趋向一个CP系统。
 
-##3.1 Two consistency features
+## 3.1 Two consistency features
 
-###3.1.1 Tunable consistency
+### 3.1.1 Tunable consistency
 
 高一致性意味着高延迟，低一致性意味着低延迟，需要根据自己的需求，自己调节。而且，Cassandra 不仅支持集群级别的一致性设置，还支持请求级别的一致性设置，用户可以针对请求设置一致性。
 
