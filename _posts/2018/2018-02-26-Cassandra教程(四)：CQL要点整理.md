@@ -28,7 +28,7 @@ CREATE TABLE cycling.cyclist_alt_stats ( id UUID PRIMARY KEY, lastname text, bir
 
 几个核心概念：
 
-##Primary Key
+## Primary Key
 
 primary key 用来唯一标记table中的一行数据，定义了数据在table中的位置和顺序，且primary key一旦定义，后续无法修改。primary key 包含两部分，可以表示为(part1, part2)，其中，part1是partition key，用于确定数据的partition，part2为可选部分，为clustering key，用于确定数据在partition内部的顺序，其中，clustering key是可选的，而partition key是必须部分。
 
@@ -44,7 +44,7 @@ partition key包含多columns时，称为Composite Partition Key。这种Partiti
 
 同时包含partition key 和 cluster key。cluster key用于数据在节点内的排序，指定cluster key后，可以快速的读取数据。
 
-##Counter Table
+## Counter Table
 
 counter 是一个特殊的column，存储了一个只会增加或减少的整数。需要注意的是，counter table里只能包含primary key 和 counter column两部分。举例如下：
 
@@ -60,7 +60,7 @@ UPDATE popular_count
  WHERE id = 6ab09bec-e68e-48d9-a5f8-97e6fb4c9b47;
 ```
 
-#物化视图
+# 物化视图
 
 Cassandra 也提供了 materialized view。Cassandra 的 materialized view 其实是基于另外的表的数据创建的一张新表， 新表与原来的表相比具有不同的primay key和属性。在 Cassandra, 数据模型是由query驱动的（相对的，关系型数据库由实体关系驱动），标准的做法是为query创建表，如果有不同的query，则需要建立不同的表，但是，这种情况会给数据维护增加困难，需要应用去维护多张表的更新。materialized view 解决了这个问题，源表更新后，会自动更新materialized view中的数据。
 
