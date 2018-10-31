@@ -1,11 +1,12 @@
+---
 layout: post
 comments: true
 date: 2018-10-27
 title: 
 categories:  
-
 - Flink
 - Big Data
+---
 
 最近一段时间负责公司的流计算平台，将此中感悟和一些学习总结汇聚成文，陆续发布。
 
