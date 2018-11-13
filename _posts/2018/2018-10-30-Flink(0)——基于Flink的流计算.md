@@ -8,9 +8,7 @@ categories:
 - Big Data
 ---
 
-本文转自个人微信公众号，[原文链接](https://mp.weixin.qq.com/s/yQer9fQAyZXTaRdRhEyCDQ)。扫描下方二维码关注我。
-
-![wx](../../wxqr.jpg)
+本文转自个人微信公众号，[原文链接](https://mp.weixin.qq.com/s/yQer9fQAyZXTaRdRhEyCDQ)。
 
 最近一段时间负责公司的流计算平台，将此中感悟和一些学习总结汇聚成文，陆续发布。
 
@@ -54,3 +52,7 @@ Flink 能够保障流计算的***正确性***。Flink 的一大优势是使应�
 # 3. 总结
 
 本文主要是流计算架构的介绍和为什么选Flink的一个总结，下一篇将开始讲具体的Flink 技术。
+
+扫描下方二维码关注我。
+
+![wx](../../wxqr.jpg)
