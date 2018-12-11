@@ -217,7 +217,7 @@ stream
 
 扫描下方二维码关注我。
 
-![wx](/Users/lx/Dropbox/lxwei.github.com/wxqr.jpg)
+![wx](../../wxqr.jpg)
 
 
 
