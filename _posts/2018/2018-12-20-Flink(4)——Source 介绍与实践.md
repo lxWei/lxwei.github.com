@@ -8,6 +8,8 @@ categories:
 - Big Data
 ---
 
+本文转自个人微信公众号，[原文链接](https://mp.weixin.qq.com/s/jvveJR99vKQ11Jlr9mkMqA)。本博客评论系统需要梯子，大家关注下公众号方便交流。
+
 本文基于Apache Flink 1.7。
 
 Source 就是Flink 程序的数据输入，Flink 提供了多种数据输入方式，下面逐一介绍。
