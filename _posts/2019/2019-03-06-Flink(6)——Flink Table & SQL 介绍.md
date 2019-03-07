@@ -162,3 +162,6 @@ Table 总是绑定到一个 TableEnvironment的，在使用时，在同一个SQL
 
 本文仅涉及一些基础知识和最常见的使用，其他的比如注册 `Table` / `TableSink` / `TableSource` / `External Catalog` 、数据类型与Table Schema的映射、查询优化等并不涉及，可以参考[官网](https://ci.apache.org/projects/flink/flink-docs-release-1.7/dev/table/common.html) 进行查阅。
 
+为了方便交流，请扫描下方二维码关注我。
+
+![QR](../../wxqr.jpg)
