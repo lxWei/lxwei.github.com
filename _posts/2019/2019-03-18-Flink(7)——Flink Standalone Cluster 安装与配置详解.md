@@ -108,4 +108,4 @@ high-availability.zookeeper.quorum: testhadoop1:2181
 
 [Flink(6)——flink table & sql 介绍](https://mp.weixin.qq.com/s/KZckw0wCuRt2O_NhmwbFkA)
 
-[Flink(7)——Flink Standalone Cluster 安装与配置详解](.)
+[Flink(7)——Flink Standalone Cluster 安装与配置详解](http://lxwei.github.io/posts/Flink(7)-Flink-Standalone-Cluster-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3.html)
