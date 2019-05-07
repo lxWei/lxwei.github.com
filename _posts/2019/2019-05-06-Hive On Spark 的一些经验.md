@@ -2,7 +2,7 @@
 layout: post
 comments: true
 date: 2019-05-06
-title: Hive On Spark 集群优化
+title: Hive On Spark 的一些经验
 categories:  
 - Hive
 - Spark
@@ -67,9 +67,13 @@ HDFS 在某些情况下无法很好的处理并发写，所以，过多的 core 
 现在来看，动态资源申请并不是一个可选项，而是必选项，一是有效利用资源，二是，Spark 与 MR 不同，MR 用完资源就释放了，而Spark 在会话终止前都不会释放（比如在命令行里跑Spark SQL，不从终端退出，是不释放资源的，即使任务已经跑完了），静态资源分配会导致后面的任务无资源可用，即使在集群空闲的情况下。
 
 > spark.dynamicAllocation.enabled = true
+>
 > spark.dynamicAllocation.minExecutors = 1
+>
 > spark.dynamicAllocation.maxExecutors = 1000
+>
 > spark.dynamicAllocation.executorIdleTimeout = 100s
+>
 > spark.dynamicAllocation.cachedExecutorIdleTimeout = 600s
 
 注意，在开启动态资源申请时，一定要开启 Spark Shuffle Service。
