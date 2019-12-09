@@ -6,8 +6,8 @@ title: Atom Feed
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>{{ site.title }}</title>
- <link href="http://tech.readingnotes.site/atom.xml" rel="self"/>
- <link href="http://tech.readingnotes.site/"/>
+ <link href="http://www.readingnotes.site/atom.xml" rel="self"/>
+ <link href="http://www.readingnotes.site/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>{{ site.production_url }}</id>
  <author>
