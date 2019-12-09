@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /assets
 Allow: /posts
-Sitemap: http://tech.readingnotes.site/sitemap.txt
-Sitemap: http://tech.readingnotes.site/atom.xml
+Sitemap: http://www.readingnotes.site/sitemap.txt
+Sitemap: http://www.readingnotes.site/atom.xml
