@@ -1,3 +1,2 @@
 # lxWei's HomePage.
-
-<http://lxWei.github.io/>
+Reading notes.
