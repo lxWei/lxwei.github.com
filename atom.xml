@@ -18,9 +18,9 @@ title: Atom Feed
  {% for post in site.posts %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://tech.readingnotes.site{{ post.url }}"/>
+   <link href="http://www.readingnotes.site{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://tech.readingnotes.site{{ post.id }}</id>
+   <id>http://www.readingnotes.site{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}
