@@ -6,7 +6,6 @@ title: Atom Feed
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>{{ site.title }}</title>
- <meta name="baidu_union_verify" content="dfcf524d7c2e7376af126576fb6bd920">
  <link href="http://www.readingnotes.site/atom.xml" rel="self"/>
  <link href="http://www.readingnotes.site/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
